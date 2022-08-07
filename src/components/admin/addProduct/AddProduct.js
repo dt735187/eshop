@@ -7,6 +7,8 @@ import { db, storage } from "../../../firebase/config";
 import Card from "../../card/Card";
 import Loader from "../../loader/Loader";
 import styles from "./AddProduct.module.scss";
+import { useParams } from "react-router-dom";
+
 
 const categories = [
   { id: 1, name: "Laptop" },
@@ -25,6 +27,7 @@ const initialState = {
 };
 
 const AddProduct = () => {
+  const {id}  = useParams();
   const [product, setProduct] = useState({
     ...initialState,
   });
@@ -33,6 +36,13 @@ const AddProduct = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
+
+  const detectForm  = (id,f1,f2){
+    if(id === "ADD"){
+      return f1;
+    }
+    return f2;
+  }
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
